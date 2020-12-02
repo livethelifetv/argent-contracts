@@ -82,8 +82,8 @@ jobs:
           command: npm run ganache >/dev/null 2>&1 & npm run test:deployment
           no_output_timeout: 60m
       - run:
-          name: "Running unit tests"
-          command: npm run ganache >/dev/null 2>&1 & npm run test
+          name: "Running unit tests with gas cost reporting"
+          command: npm run ganache >/dev/null 2>&1 & npm run test:gas
       # Save coverage artifacts
       - store_artifacts:
           path: gas-usage-report.log

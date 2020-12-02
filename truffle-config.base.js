@@ -24,6 +24,7 @@ const HDWalletProvider = require("@truffle/hdwallet-provider");
 
 const _gasPrice = process.env.DEPLOYER_GAS_PRICE || 20000000000;
 const _gasLimit = 6000000;
+const _gasReporter = process.env.GAS_REPORTER || false;
 
 function getKeys() {
   // NOTE: While https://github.com/trufflesuite/truffle/issues/1054 is implemented we are using a temporary fix
@@ -122,11 +123,10 @@ module.exports = {
   mocha: {
     useColors: true,
     timeout: 1000000,
-    reporter: "eth-gas-reporter",
+    reporter: _gasReporter ? "eth-gas-reporter" : "spec",
     reporterOptions: {
       currency: "USD",
       onlyCalledMethods: true,
-      excludeContracts: ["Migrations"],
       outputFile: "gas-usage-report.log"
     },
   },
